@@ -28,3 +28,23 @@ python src/run_experiments.py
 
 ## Environment
 Python 3.11 · exact packages in requirements.txt · see Dockerfile
+
+## Experiment Results (MLflow)
+
+The following 5 runs were logged with MLflow tracking:
+
+![MLflow Runs](docs/mlflow_runs.png)
+
+| Run | Seed | AUC-ROC | Accuracy |
+|-----|------|---------|----------|
+| logreg-seed-13  | 13  | 0.52xx | 0.51xx |
+| logreg-seed-21  | 21  | 0.48xx | 0.49xx |
+| logreg-seed-42  | 42  | 0.50xx | 0.50xx |
+| logreg-seed-87  | 87  | 0.52xx | 0.50xx |
+| logreg-seed-100 | 100 | 0.43xx | 0.43xx |
+
+To view results interactively:
+```bash
+python3 -m mlflow ui
+```
+Then open: http://127.0.0.1:5000
