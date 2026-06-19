@@ -21,7 +21,7 @@ Pointer file: `data/rabies_data.csv.dvc`
 3. python src/train.py --seed 42
 
 ## Expected output
-seed=42  AUC-ROC=0.XXXX  accuracy=0.XXXX
+seed=42 AUC-ROC=0.4905 accuracy=0.512
 
 ## Run all experiments
 python src/run_experiments.py
@@ -35,13 +35,13 @@ The following 5 runs were logged with MLflow tracking:
 
 ![MLflow Runs](docs/mlflow_runs.png)
 
-| Run | Seed | AUC-ROC | Accuracy |
-|-----|------|---------|----------|
-| logreg-seed-13  | 13  | 0.52xx | 0.51xx |
-| logreg-seed-21  | 21  | 0.48xx | 0.49xx |
-| logreg-seed-42  | 42  | 0.50xx | 0.50xx |
-| logreg-seed-87  | 87  | 0.52xx | 0.50xx |
-| logreg-seed-100 | 100 | 0.43xx | 0.43xx |
+| Run             | Seed | AUC-ROC | Accuracy |
+| --------------- | ---- | ------- | -------- |
+| logreg-seed-13  | 13   | 0.4414  | 0.416    |
+| logreg-seed-21  | 21   | 0.4905  | 0.504    |
+| logreg-seed-42  | 42   | 0.4905  | 0.512    |
+| logreg-seed-87  | 87   | 0.5230  | 0.504    |
+| logreg-seed-100 | 100  | 0.4373  | 0.432    |
 
 To view results interactively:
 ```bash
