@@ -1,50 +1,26 @@
-# Rabies Risk ML Peru
+# UNMSM Research Methods — Jorge Limo
 
-Reproducible ML pipeline for zoonotic wild rabies transmission 
-risk prediction in Peru using a One Health approach.
+Doctoral capstone project for *Research Methods and Scientific Integrity in AI and Advanced Technologies* — UNMSM, Doctoral Program in Deep Technologies.
 
-**Author:** Jorge Luis Limo Arispe - UNMSM Doctoral Program 2026
+**Author:** Jorge Luis Limo Arispe
+**Topic:** Predictive Model for Zoonotic Transmission Risk of Wild Rabies in Wildlife-Human Contact Zones Using Machine Learning with a One Health Approach in Peru
 
-## What this is
-Logistic regression baseline trained on simulated One Health 
-variables (NDVI, temperature, precipitation, forest loss, 
-bat occurrence) as a reproducible foundation for the doctoral 
-research protocol.
+## Repository Structure
 
-## Data
-`data/rabies_data.csv` is tracked with DVC.
-Pointer file: `data/rabies_data.csv.dvc`
+- `01_paradigm/` — Paradigm Justification Statement (Session 1)
+- `02_method/` — Method-Fit Matrix (Session 2)
+- `03_protocol/` — Research Protocol versions v0.1 → v2.0 (Sessions 3, 13, 15)
+- `04_literature/` — Systematic Literature Review + PRISMA diagram + Gap Analysis (Session 4)
+- `05_pipeline/` — Reproducible ML pipeline: Git + DVC + MLflow + Docker (Session 5)
 
-## Reproduce the result
-1. pip install -r requirements.txt
-2. dvc pull
-3. python src/train.py --seed 42
+## Reproduce the Pipeline
 
-## Expected output
-seed=42 AUC-ROC=0.4905 accuracy=0.512
+See full instructions in [`05_pipeline/README.md`](05_pipeline/README.md).
 
-## Run all experiments
-python src/run_experiments.py
-
-## Environment
-Python 3.11 · exact packages in requirements.txt · see Dockerfile
-
-## Experiment Results (MLflow)
-
-The following 5 runs were logged with MLflow tracking:
-
-![MLflow Runs](docs/mlflow_runs.png)
-
-| Run             | Seed | AUC-ROC | Accuracy |
-| --------------- | ---- | ------- | -------- |
-| logreg-seed-13  | 13   | 0.4414  | 0.416    |
-| logreg-seed-21  | 21   | 0.4905  | 0.504    |
-| logreg-seed-42  | 42   | 0.4905  | 0.512    |
-| logreg-seed-87  | 87   | 0.5230  | 0.504    |
-| logreg-seed-100 | 100  | 0.4373  | 0.432    |
-
-To view results interactively:
-```bash
-python3 -m mlflow ui
-```
-Then open: http://127.0.0.1:5000
+Quick start:
+\`\`\`bash
+cd 05_pipeline
+pip install -r requirements.txt
+dvc pull
+python src/train.py --seed 42
+\`\`\`
