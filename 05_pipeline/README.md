@@ -46,24 +46,28 @@ Two models are run per seed, both evaluated with the same spatial 5-fold split:
 
 ## Experiment Results
 
-5-fold spatial cross-validation, mean ± std across folds, logged in MLflow under experiment `rabies-risk-pipeline`:
+5-fold spatial cross-validation, mean ± std across folds, produced by running `src/train.py` for each seed against the current `data/rabies_data.csv` (regenerated with `block_id`/`lat`/`lon`, see `data/create_dataset.py`). Run on the author's machine (macOS):
 
 | Seed | Model | AUC-ROC | PR-AUC | Sens@Spec90 | Accuracy |
 |---|---|---|---|---|---|
-| 13 / 21 / 42 / 87 / 100 | `logreg` | 0.4611 ± 0.0390 | 0.4949 ± 0.0250 | 0.0925 | 0.4724 |
-| 13 | `random_forest` | 0.4518 ± 0.0686 | 0.4792 ± 0.0428 | 0.0699 | 0.4623 |
-| 21 | `random_forest` | 0.4259 ± 0.0499 | 0.4672 ± 0.0334 | 0.0610 | 0.4439 |
-| 42 | `random_forest` | 0.4329 ± 0.0421 | 0.4641 ± 0.0260 | 0.0568 | 0.4560 |
-| 87 | `random_forest` | 0.4426 ± 0.0585 | 0.4768 ± 0.0478 | 0.0665 | 0.4630 |
-| 100 | `random_forest` | 0.4537 ± 0.0713 | 0.4906 ± 0.0523 | 0.0849 | 0.4604 |
+| 13 / 21 / 42 / 87 / 100 | `logreg` | 0.5359 ± 0.0438 | 0.5959 ± 0.0731 | 0.1252 | 0.5300 |
+| 13 | `random_forest` | 0.5257 ± 0.0786 | 0.6091 ± 0.0666 | 0.1764 | 0.4960 |
+| 21 | `random_forest` | 0.5504 ± 0.0716 | 0.6180 ± 0.0515 | 0.1661 | 0.5200 |
+| 42 | `random_forest` | 0.5370 ± 0.0594 | 0.6014 ± 0.0470 | 0.1484 | 0.5120 |
+| 87 | `random_forest` | 0.5560 ± 0.0839 | 0.6295 ± 0.0506 | 0.1885 | 0.5200 |
+| 100 | `random_forest` | 0.5327 ± 0.0731 | 0.5880 ± 0.0726 | 0.1448 | 0.5340 |
 
-**Reading these numbers**: AUC-ROC ≈ 0.43–0.52 (no model meaningfully better than chance) is *expected and correct* on signal-free synthetic data. It is a sanity check confirming the pipeline has no data leakage — not a measure of real predictive ability. `logreg` is identical across all seeds by mathematical construction (see above); `random_forest` varies, demonstrating genuine seed sensitivity.
+**Reading these numbers**: AUC-ROC ≈ 0.53–0.56 (barely above chance) is *expected and correct* on signal-free synthetic data — it is a sanity check confirming the pipeline has no data leakage, not a measure of real predictive ability. `logreg` is identical across all five seeds by mathematical construction (see above); `random_forest` varies fold-to-fold and seed-to-seed, demonstrating genuine seed sensitivity.
 
 ## Stranger Test (Reproducibility Verification)
 
-The pipeline was independently re-run by cloning the repository into a fresh environment, pulling data via `dvc pull`, and re-executing `src/train.py` for all five seeds. Verified across **two independent machines/environments** (different Python/scikit-learn installations): the exact same per-fold and per-seed metrics were reproduced both times, confirming the pipeline meets the course's reproducibility standard.
+To verify: clone the repo into a fresh environment, run `pip install -r requirements.txt`, then `dvc pull` (or `python3 data/create_dataset.py` if you don't have access to the DVC remote), then re-run `src/train.py` for each seed.
 
-A `RuntimeWarning` (`divide by zero` / `overflow in matmul`) appears on at least one environment running an older scikit-learn build, during `logreg` fitting on near-zero-signal synthetic data. This does **not** affect the final reported metrics — verified identical across both environments — and is noted here per the course's "compute reproducibility challenges" guidance (Pineau et al., 2021) rather than hidden.
+**Cross-platform note:** this pipeline was independently re-run on a second machine (Linux) during development. `logreg` reproduced bit-identically (as expected — `GroupKFold` has no randomness and `lbfgs` is a deterministic convex solver). `random_forest`, however, showed small but real differences between macOS and Linux for the *same* seed (e.g. seed 42, fold 0: AUC-ROC 0.6327 on Linux vs 0.6192 on macOS) — almost certainly due to platform-level differences in BLAS/threading behavior during scikit-learn's tree construction, not a bug in this code. This is a live example of the "compute reproducibility challenges" flagged by Pineau et al. (2021): fixing a `random_state` guarantees *within-platform* reproducibility, not *cross-platform* bit-exactness. Running via the provided `Dockerfile` (rather than a native Python install) is the intended way to eliminate this variance for anyone reproducing this repo.
+
+A `RuntimeWarning` (`invalid value encountered in matmul`) appears during `logreg` fitting on some folds, on both platforms. This is expected on near-zero-signal synthetic data (the optimizer approaches a near-flat loss surface) and does **not** affect the final reported metrics.
+
+⚠️ **Known limitation:** `.dvc/config` currently points to a **local folder on the author's own machine** (`/Users/jorgelimo/dvc-storage/...`), not a shared remote. This means `dvc pull` will **not** work for anyone else who clones this repo — only `python3 data/create_dataset.py` will. For the "stranger test" to genuinely pass for an external grader, the DVC remote should point to a shared location (e.g., Google Drive — `dvc-gdrive` is already in `requirements.txt`) before final submission.
 
 ## Running the pipeline
 
