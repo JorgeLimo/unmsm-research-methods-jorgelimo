@@ -20,7 +20,7 @@ This research directly addresses the gap between the documented epidemiological 
 
 ## 3.4. Literature Review
 
-Calderone (2022) — systematic review of 87 studies (2010–2021) — concludes that Random Forest and XGBoost show the best performance in spatially structured epidemiological contexts, while LSTM models show advantages for time series with long temporal dependencies. Benavides et al. (2020) demonstrated that human rabies by *D. rotundus* follows river corridors and deforestation patterns in Colombia and Peru, validating the integration of land use variables and spatial distribution of the reservoir as essential predictors. Blackwood et al. (2013) established that immigration rates between bat colonies and population density are fundamental variables to explain transmission dynamics. Plowright et al. (2017) showed that land use changes and habitat loss are the main drivers of increased contact rates between wildlife reservoirs and human populations. Meyer et al. (2019) proposed spatial cross-validation as the appropriate evaluation strategy for geospatial ML models.
+Keshavamurthy et al. (2024) compared XGBoost and logistic regression for predicting rabies probability using case-history and clinical-sign data in a low-surveillance setting (Haiti), finding XGBoost achieved superior sensitivity and PR-AUC after addressing class imbalance with oversampling — directly informing the algorithm selection and imbalance-handling strategy for the present study. Benavides et al. (2020) demonstrated that human rabies by *D. rotundus* follows river corridors and deforestation patterns in Colombia and Peru, validating the integration of land use variables and spatial distribution of the reservoir as essential predictors. Blackwood et al. (2013) established that immigration rates between bat colonies and population density are fundamental variables to explain transmission dynamics. Plowright et al. (2017) showed that land use changes and habitat loss are the main drivers of increased contact rates between wildlife reservoirs and human populations. Meyer et al. (2019) proposed spatial cross-validation as the appropriate evaluation strategy for geospatial ML models.
 
 ## 3.5. Research Questions / Hypotheses
 
@@ -57,9 +57,13 @@ Computational / Quantitative Empirical paradigm with a Design Science Research c
 
 Three supervised ML algorithms: Random Forest (robust ensemble, interpretable via variable importance); XGBoost (regularized gradient boosting, superior on heterogeneous tabular data); LSTM (recurrent neural network for long temporal dependencies in outbreak series).
 
+### Unit of Analysis & Positive Class Definition
+
+Given that wild rabies transmission events are rare, the unit of analysis is defined as **district-month** (a Peruvian administrative district observed within a given calendar month, 2010–2024). The **positive class** is defined as: at least one confirmed human or bovine wild rabies case attributed to *D. rotundus* transmission reported by CDC-MINSA/SENASA for that district-month; all other district-months are labeled negative. This resolution is fine enough to capture spatial and seasonal risk signal while remaining coarse enough for reliable matching with monthly ecological/climatic covariates (NDVI, precipitation, temperature composites).
+
 ### Validation
 
-Spatial cross-validation (Meyer et al., 2019) dividing data into contiguous geographic blocks. Primary metric: AUC-ROC ≥ 0.80. Secondary: sensitivity, specificity, F1-score, Brier score. SHAP values for variable importance and interpretability.
+Spatial cross-validation (Meyer et al., 2019) dividing data into contiguous geographic blocks, grouped by district to prevent spatial leakage between neighboring units. Because positive district-months are expected to be rare relative to the total (severe class imbalance), **AUC-ROC alone can look misleadingly optimistic and is not sufficient on its own**. Primary metrics: **Precision-Recall AUC (PR-AUC)** and **sensitivity at a fixed specificity of 90% (Sens@Spec90)**, both robust to class imbalance and directly relevant to an early-warning use case where missed positives (false negatives) are costlier than false alarms. Reported for comparability: AUC-ROC (target ≥ 0.80), specificity, F1-score, Brier score. SHAP values for variable importance and interpretability.
 
 ## 3.7. Ethical Considerations
 
@@ -98,8 +102,6 @@ Benavides, J. A., et al. (2020). Defining new pathways to manage the ongoing eme
 
 Blackwood, J. C., et al. (2013). Resolving the roles of immunity, pathogenesis, and immigration for rabies persistence in vampire bats. *PNAS, 110*(51), 20837–20842.
 
-Calderone, W. (2022). One Health and zoonotic disease surveillance: Machine learning applications in Latin America. *One Health, 14*, 100359.
-
 CDC-MINSA. (2020). Vigilancia de enfermedades zoonóticas. Ministerio de Salud del Perú.
 
 Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. *KDD 2016*, 785–794.
@@ -111,6 +113,8 @@ Hansen, M. C., et al. (2013). High-resolution global maps of 21st-century forest
 Hastie, T., Tibshirani, R., & Friedman, J. (2009). *The Elements of Statistical Learning* (2nd ed.). Springer.
 
 Hevner, A. R., et al. (2004). Design science in information systems research. *MIS Quarterly, 28*(1), 75–105.
+
+Keshavamurthy, R., Boutelle, C., Nakazawa, Y., Joseph, H., Joseph, D. W., Dilius, P., Gibson, A. D., & Wallace, R. M. (2024). Machine learning to improve the understanding of rabies epidemiology in low surveillance settings. *Scientific Reports, 14*, Article 25851. https://doi.org/10.1038/s41598-024-76089-3
 
 Meyer, H., et al. (2019). Importance of spatial predictor variable selection in machine learning applications. *Ecological Modelling, 411*, 108815.
 
