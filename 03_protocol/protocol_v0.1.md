@@ -65,6 +65,16 @@ Given that wild rabies transmission events are rare, the unit of analysis is def
 
 Spatial cross-validation (Meyer et al., 2019) dividing data into contiguous geographic blocks, grouped by district to prevent spatial leakage between neighboring units. Because positive district-months are expected to be rare relative to the total (severe class imbalance), **AUC-ROC alone can look misleadingly optimistic and is not sufficient on its own**. Primary metrics: **Precision-Recall AUC (PR-AUC)** and **sensitivity at a fixed specificity of 90% (Sens@Spec90)**, both robust to class imbalance and directly relevant to an early-warning use case where missed positives (false negatives) are costlier than false alarms. Reported for comparability: AUC-ROC (target ≥ 0.80), specificity, F1-score, Brier score. SHAP values for variable importance and interpretability.
 
+### Data Contingency Plan
+
+Access to complete, national-scale CDC-MINSA and SENASA wild rabies case records is the primary bottleneck of this research (see the data-quality uncertainty flagged in §1.5). Rather than letting this single point of failure delay the whole timeline, the following contingency plan applies:
+
+**Trigger:** If, by Month 4, formal data-sharing agreements with CDC-MINSA and/or SENASA are not yet signed — or preliminary records show large gaps (e.g., more than 30% of districts in the target region lack usable monthly records for 2010–2024) — the study scope falls back to the regional pilot below instead of stalling.
+
+**Fallback — regional pilot:** Restrict the initial predictive model to the **Amazonas region**, which already has confirmed 2024 wild rabies cases documented (CDC-MINSA, 2020; §1.1) and is a SENASA priority surveillance zone with comparatively better historical reporting than the national average. The model is validated at regional scale first and extended nationally as additional departments' records become available, reusing the same reproducible pipeline (§5).
+
+**Unaffected by this bottleneck:** Environmental and reservoir-distribution layers — NDVI/forest cover (MODIS/Landsat, MapBiomas), climatic data (SENAMHI, WorldClim), *D. rotundus* occurrence (GBIF, IUCN) — are all open-access and not subject to institutional approval delays. Feature engineering and the reproducibility pipeline (Git/DVC/MLflow/Docker, §5) can therefore proceed on schedule regardless of epidemiological data access status.
+
 ## 3.7. Ethical Considerations
 
 This research works exclusively with publicly available, aggregated, and anonymized institutional data. No direct data collection from human subjects or animals is planned. The research will adhere to Peru's CONCYTEC ethics guidelines and Law 29733 on Personal Data Protection. UNMSM ethics committee consultation will be sought prior to any fieldwork. The model will be evaluated for potential geographic and demographic bias using fairness metrics to reduce disparities in predictive performance across regions and population groups, particularly in remote areas with historically limited access to health services.
@@ -82,7 +92,10 @@ This research works exclusively with publicly available, aggregated, and anonymi
 
 ### Preliminary Timeline (36 months)
 
-- **Months 1–6:** Ethics approval, data collection and integration, database construction and quality control.
+- **Month 1:** Submit formal data-access requests to CDC-MINSA and SENASA **in parallel with** (not after) the UNMSM ethics committee submission — front-loaded because data access is this project's main bottleneck (see Data Contingency Plan, §3.6). Begin acquisition of open-access environmental/climatic/reservoir layers (NDVI, WorldClim, GBIF), which do not depend on that access.
+- **Months 1–4:** Ethics approval process continues; open-access layers integrated regardless of epidemiological data status.
+- **Month 4 — Go/no-go checkpoint:** If national-scale CDC-MINSA/SENASA access is not yet confirmed, activate the fallback and restrict initial scope to the Amazonas regional pilot (§3.6).
+- **Months 4–6:** Epidemiological data integration and database quality control — national scope if access was secured, regional pilot scope otherwise.
 - **Months 7–12:** Exploratory data analysis, feature engineering, baseline model, spatial cross-validation setup.
 - **Months 13–20:** Development, training, and comparison of RF, XGBoost, LSTM; SHAP analysis; reproducibility pipeline.
 - **Months 21–26:** Early warning prototype design, development, and usability evaluation with SENASA/CDC-MINSA.
