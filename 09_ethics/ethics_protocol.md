@@ -2,7 +2,7 @@
 
 Applying the Belmont Report (1979) principles and Peru's research-ethics framework to: *Predictive Model for Zoonotic Transmission Risk of Wild Rabies in Wildlife-Human Contact Zones Using Machine Learning with a One Health Approach in Peru.*
 
-Structured against the course's "Anatomy of an AI research ethics protocol" (Session 9): Purpose & participants → Data collection → Informed consent → Risks → Benefits → Confidentiality → Data storage & retention → Conflict of interest, plus the AI-specific additions reviewers now expect.
+Anatomy of an AI research ethics protocol: Purpose & participants → Data collection → Informed consent → Risks → Benefits → Confidentiality → Data storage & retention → Conflict of interest, plus the AI-specific additions reviewers now expect.
 
 ## 9.1. Purpose & Participants
 
@@ -55,7 +55,7 @@ Because this is secondary use of pre-existing administrative surveillance data r
 ## 9.6. Confidentiality
 
 - No direct identifiers (names, exact addresses, individual case IDs) will appear in the analytic dataset or in the public repository at any point.
-- The **district-month unit of analysis** (defined for statistical reasons in §3.6, Unit of Analysis & Positive Class Definition) doubles as a confidentiality control: aggregating to this level is structurally similar to a k-anonymity constraint, since it groups multiple individuals per analytic unit rather than exposing person-level records. The formal anonymization technique (k-anonymity threshold, l-diversity, or differential privacy, as appropriate) will be specified in the Data Management Plan (`10_data_mgmt/`, Session 10).
+- The **district-month unit of analysis** (defined for statistical reasons in §3.6, Unit of Analysis & Positive Class Definition) doubles as a confidentiality control: aggregating to this level is structurally similar to a k-anonymity constraint, since it groups multiple individuals per analytic unit rather than exposing person-level records. The formal anonymization technique (k-anonymity threshold, l-diversity, or differential privacy, as appropriate) will be specified in the Data Management Plan (`10_data_mgmt/`).
 - Only aggregated, de-identified, derived features will be tracked in the public DVC/GitHub pipeline — raw institutional CDC-MINSA/SENASA records are never intended for public distribution, consistent with the license terms expected in the eventual data-sharing agreement.
 
 ## 9.7. Data Storage & Retention
@@ -91,7 +91,7 @@ Because this is secondary use of pre-existing administrative surveillance data r
 
 ## 9.11. Case Study Reflection: Lessons from COMPAS
 
-The course's Session 9 lab examined COMPAS as a case where a Justice failure (the error-rate burden fell disproportionately on Black defendants) was compounded by a Beneficence failure (deployment without adequate harm auditing). Applying that lesson directly to this research: the equivalent failure mode here would be a rabies-risk model that performs worse in historically under-monitored Amazonian districts precisely *because* those districts have sparser training data — silently reproducing the surveillance gap the model is meant to fix, and then having that biased output used to (mis)allocate real vaccination and surveillance resources. This is why §9.4 and §9.9 commit to an explicit before-deployment fairness check across regions, not just an aggregate accuracy check — the same lesson COMPAS should have taught the field, applied here before it becomes a real harm rather than after.
+The equivalent failure mode here would be a rabies-risk model that performs worse in historically under-monitored Amazonian districts precisely *because* those districts have sparser training data — silently reproducing the surveillance gap the model is meant to fix, and then having that biased output used to (mis)allocate real vaccination and surveillance resources. This is why §9.4 and §9.9 commit to an explicit before-deployment fairness check across regions, not just an aggregate accuracy check — the same lesson COMPAS should have taught the field, applied here before it becomes a real harm rather than after.
 
 ---
 

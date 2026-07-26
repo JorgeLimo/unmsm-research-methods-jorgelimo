@@ -1,6 +1,6 @@
 # Data Management Plan
 
-Following the course's 7-section DMP structure (Session 10), applied to the research dataset described in the protocol (`03_protocol/protocol_v0.1.md` §3.6, Data Sources) and building directly on the confidentiality commitments already made in the Ethics Protocol (`09_ethics/ethics_protocol.md` §9.6).
+Applied to the research dataset described in the protocol (`03_protocol/protocol_v0.1.md` §3.6, Data Sources) and building directly on the confidentiality commitments already made in the Ethics Protocol (`09_ethics/ethics_protocol.md` §9.6).
 
 ## 10.1. Data Description
 
