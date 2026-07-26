@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jorgelimo/Projects/UNMSM/Rabies-Risk-ML-Peru/mlruns/618836064982793218/66735cdf8e194be9b7b1df266f8b0e9b/artifacts
+end_time: 1785088092917
+entry_point_name: ''
+experiment_id: '618836064982793218'
+lifecycle_stage: active
+run_id: 66735cdf8e194be9b7b1df266f8b0e9b
+run_name: random_forest-seed-21
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1785088092894
+status: 3
+tags: []
+user_id: jorgelimo
