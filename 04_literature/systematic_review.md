@@ -62,8 +62,8 @@ AND ("Peru" OR "Amazon" OR "Latin America")
 
 ## 4.5. The 10 Selected Papers
 
-1. **Calderone, W. (2022).** One Health and zoonotic disease surveillance: Machine learning applications in Latin America. *One Health, 14*, 100359.
-   *Reason for inclusion: Direct review of ML applied to zoonotic surveillance in Latin America. Anchor reference.*
+1. **Keshavamurthy, R., Boutelle, C., Nakazawa, Y., Joseph, H., Joseph, D. W., Dilius, P., Gibson, A. D., & Wallace, R. M. (2024).** Machine learning to improve the understanding of rabies epidemiology in low surveillance settings. *Scientific Reports, 14*, Article 25851. https://doi.org/10.1038/s41598-024-76089-3
+   *Reason for inclusion: Direct application of XGBoost vs. logistic regression to rabies risk prediction under data-limited surveillance, including PR-AUC and risk-stratification methodology. Anchor reference.*
 
 2. **Benavides, J. A., et al. (2020).** Defining new pathways to manage the ongoing emergence of bat rabies in Latin America. *Viruses, 12*(9), 1002.
    *Reason for inclusion: Spatial analysis of D. rotundus rabies transmission in Peru and Colombia. Essential for ecological variables.*
@@ -95,4 +95,3 @@ AND ("Peru" OR "Amazon" OR "Latin America")
 ---
 
 **AI Assistance Disclosure:** AI assistance (Claude, Anthropic) was used for structuring the search strategy and grammar/style editing. All inclusion/exclusion decisions and paper selection rationale represent the original intellectual work of the author. Disclosed in accordance with the Green category AI Use Policy of the course.
-
