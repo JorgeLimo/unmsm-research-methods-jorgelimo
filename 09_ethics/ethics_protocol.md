@@ -85,7 +85,7 @@ Because this is secondary use of pre-existing administrative surveillance data r
 | **Belmont Report (1979)** — Respect for Persons, Beneficence, Justice | Structures this entire protocol (§9.1–9.9) |
 | **Ley N° 29733** — Personal Data Protection (in force since 2011; reg. DS 003-2013-JUS, updated DS 016-2024-JUS) | Governs the consent-waiver justification (§9.3) and ARCO rights preservation through source institutions |
 | **Ley N° 31814** (2023) — Promotion of AI in Peru | Applies to the eventual early-warning prototype: principles of ethics, transparency, security, and accountability for AI development and use (§9.9) |
-| **CONCYTEC — Código Nacional de Integridad Científica** (updated 2024, RP 028 & 035-2024-CONCYTEC-P) | Governs data retention/audit expectations (§9.7) and overall scientific-integrity obligations, consistent with the course's Green/Amber/Red AI-use policy already followed throughout this repository |
+| **CONCYTEC — Código Nacional de Integridad Científica** (updated 2024, RP 028 & 035-2024-CONCYTEC-P) | Governs data retention/audit expectations (§9.7) and the overall scientific-integrity obligations of the research, including transparent disclosure of any AI assistance used in preparing research documents |
 | **CARE Principles** (Collective Benefit, Authority to Control, Responsibility, Ethics) | Governs community-level (not just individual-level) engagement given the Amazonian/Andean population affected (§9.3) |
 | **UNMSM Ethics Committee** | Formal review and approval of the consent waiver (§9.3) will be sought prior to any fieldwork or prototype deployment, per §3.7 of the protocol |
 

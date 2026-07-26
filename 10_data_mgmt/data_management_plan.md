@@ -55,7 +55,7 @@ This section makes the confidentiality commitment from the Ethics Protocol (§9.
 | CONCYTEC Código Nacional de Integridad Científica | ✅ Always | Retention and audit-trail obligations reflected in §10.7 |
 | Ley N° 31814 (AI Promotion Law, 2023) | ✅ Applies to prototype phase | Transparency/accountability principles carried into the Ethics Protocol's AI-specific considerations (§9.9) |
 | CARE Principles (Indigenous data governance) | ✅ Applies | Community-level consultation commitment already made in Ethics Protocol §9.3; carried into this DMP's sharing plan (§10.6) |
-| Data breach notification | ✅ Applies if breach occurs | Peru's authority (Autoridad Nacional de Protección de Datos Personales) notification procedure to be followed; target within 48 hours of detection, consistent with the course's reference standard |
+| Data breach notification | ✅ Applies if breach occurs | Peru's authority (Autoridad Nacional de Protección de Datos Personales) notification procedure to be followed; target within 48 hours of detection, consistent with common international breach-notification standards (e.g., GDPR Art. 33's 72-hour benchmark, adapted here to a stricter internal target) |
 
 ## 10.6. Sharing Plan
 

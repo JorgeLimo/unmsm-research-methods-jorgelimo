@@ -4,11 +4,11 @@
 
 **Keshavamurthy, R., Boutelle, C., Nakazawa, Y., Joseph, H., Joseph, D. W., Dilius, P., Gibson, A. D., & Wallace, R. M. (2024).** Machine learning to improve the understanding of rabies epidemiology in low surveillance settings. *Scientific Reports, 14*, Article 25851. https://doi.org/10.1038/s41598-024-76089-3
 
-**Why this paper:** this is the anchor citation of my own systematic review and protocol (§3.4, §4.5) — it directly justified my choice of XGBoost over logistic regression and my class-imbalance handling strategy (oversampling). Auditing it serves two purposes at once: it is the required Session 6 exercise, and it tells me whether the methodological precedent I am building on is itself reproducible — which turns out to matter (see §6.4).
+**Why this paper:** this is the anchor citation of my own systematic review and protocol (§3.4, §4.5) — it directly justified my choice of XGBoost over logistic regression and my class-imbalance handling strategy (oversampling). Auditing it tells me whether the methodological precedent I am building on is itself reproducible — which turns out to matter (see §6.4).
 
 ## 6.2. Reproducibility Scorecard
 
-Scored against the course's Session 5/6 scorecard (Yes / Partial / No), with the exact supporting text quoted from the paper.
+Scored on seven reproducibility dimensions (seeds, splits, multiple runs, statistical significance, effect size/CI, compute documentation, code & data availability) — Yes / Partial / No — with the exact supporting text quoted from the paper.
 
 | # | Item | Score | Evidence |
 |---|---|---|---|
@@ -24,14 +24,14 @@ Scored against the course's Session 5/6 scorecard (Yes / Partial / No), with the
 
 **1 / 7 items fully met, 1 partial, 5 not met.**
 
-This paper would score poorly on the NeurIPS-style reproducibility checklist (Pineau et al., 2021) referenced in our Session 5–6 material: it reports *what* was done at a conceptual level (which models, which rebalancing techniques, which metrics) but not *how to redo it* (no seeds, no exact split, no variance, no code, no open data). Using the course's own scorecard language: a stranger with only this paper in hand could not reproduce Table 3's numbers, even approximately.
+This paper would score poorly on the NeurIPS-style reproducibility checklist (Pineau et al., 2021): it reports *what* was done at a conceptual level (which models, which rebalancing techniques, which metrics) but not *how to redo it* (no seeds, no exact split, no variance, no code, no open data). In plain terms: a stranger with only this paper in hand could not reproduce Table 3's numbers, even approximately.
 
 ## 6.4. Relevance to My Own Research
 
 This is the useful and slightly uncomfortable part of the exercise: **this paper is my anchor citation, and it is less reproducible than my own pipeline.**
 
 - My protocol (§3.6, Validation) now specifies fixed seeds, an explicit spatial cross-validation scheme grouped by `block_id`, and PR-AUC + sensitivity-at-fixed-specificity as primary metrics *precisely because* AUC-ROC alone is misleading under class imbalance — a point I took directly from this paper's own PR-AUC-over-ROC-AUC argument (*"PR-AUC was preferred to select the best-performing model in our study as it prioritizes minority class more compared to ROC-AUC"* — citing Ozenne et al., 2015). The irony is that the paper that taught me to prefer PR-AUC does not itself report any variance or CI on its PR-AUC values, so I cannot tell whether XGB-ROS's PR-AUC of 0.66 is meaningfully different from XGB's 0.72 (Table 3) — the difference could easily be within noise.
-- This does **not** invalidate using Keshavamurthy et al. (2024) as a methodological precedent — the modeling *choices* (XGB > LR for this problem type, oversampling for rare-event sensitivity, PR-AUC over ROC-AUC) are well-reasoned and consistent with the broader literature (Fernandez et al., 2018; Ozenne et al., 2015, both cited in the paper). What it means is that I should **not** cite this paper's specific numeric results (e.g., "XGB-ROS achieved 0.95 sensitivity") as an established benchmark to beat or match — those numbers have no reported uncertainty, so treating them as precise targets would import the same optimism this course warns against.
+- This does **not** invalidate using Keshavamurthy et al. (2024) as a methodological precedent — the modeling *choices* (XGB > LR for this problem type, oversampling for rare-event sensitivity, PR-AUC over ROC-AUC) are well-reasoned and consistent with the broader literature (Fernandez et al., 2018; Ozenne et al., 2015, both cited in the paper). What it means is that I should **not** cite this paper's specific numeric results (e.g., "XGB-ROS achieved 0.95 sensitivity") as an established benchmark to beat or match — those numbers have no reported uncertainty, so treating them as precise targets would import the same false optimism that reproducibility audits like this one are meant to catch.
 - Practically: my own `05_pipeline` now does what this paper does not — fixed seeds, described spatial splits, PR-AUC and Sens@Spec90 with fold-level variance (mean ± std across 5 folds), and an open, re-runnable dataset generator. I am, on the reproducibility dimension specifically, already ahead of my own anchor reference.
 
 ## 6.5. What Would Need to Change for This Paper to Pass a Stranger Test

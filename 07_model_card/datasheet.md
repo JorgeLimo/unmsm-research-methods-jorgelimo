@@ -7,7 +7,7 @@ Following the structure proposed by Gebru et al. (2021), *Datasheets for Dataset
 ## Motivation
 
 **For what purpose was the dataset created?**
-To provide a small, fully reproducible stand-in dataset for the Session 5 pipeline exercise, so that the Git/DVC/MLflow/Docker stack and the spatial cross-validation strategy could be built, tested, and documented *before* real wild rabies surveillance data is secured — since data access is this project's main bottleneck (§1.5, §3.6 of the protocol).
+To provide a small, fully reproducible stand-in dataset for the reproducibility-infrastructure pipeline (`05_pipeline/`), so that the Git/DVC/MLflow/Docker stack and the spatial cross-validation strategy could be built, tested, and documented *before* real wild rabies surveillance data is secured — since data access is this project's main bottleneck (§1.5, §3.6 of the protocol).
 
 **Who created it and on whose behalf?**
 Jorge Luis Limo Arispe, as part of the UNMSM Doctoral Program in Deep Technologies course "Research Methods and Scientific Integrity in AI." Not created on behalf of any institution; not derived from CDC-MINSA, SENASA, or any other real data holder.
@@ -72,7 +72,7 @@ No preprocessing beyond generation — the raw generator output is used as-is by
 ## Uses
 
 **Has the dataset been used for any tasks already?**
-Yes — exclusively to validate the Session 5 reproducibility pipeline (`05_pipeline/`): confirming that Git + DVC + MLflow + Docker + spatial `GroupKFold` work end-to-end, and that a stranger can reproduce the exact reported metrics from a fresh clone.
+Yes — exclusively to validate the reproducibility pipeline (`05_pipeline/`): confirming that Git + DVC + MLflow + Docker + spatial `GroupKFold` work end-to-end, and that a stranger can reproduce the exact reported metrics from a fresh clone.
 
 **Is there anything about the composition of the dataset or the way it was collected that might impact future uses?**
 Critically, yes: because `target` has no engineered relationship to any feature, **this dataset must never be used to draw any conclusion about wild rabies risk, real feature importance, or real model performance.** Any resemblance between a trained model's behavior on this data and real epidemiological patterns would be coincidental.
